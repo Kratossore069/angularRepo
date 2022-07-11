@@ -1,6 +1,6 @@
-import { Hero } from '../interfaces/heroe';
+import { HeroInterfaz } from '../interfaces/heroe';
 
-export const HEROES: Hero[] = [
+export const HEROESLISTA: HeroInterfaz[] = [
     { id: 12, nombre: 'Batman' },
     { id: 13, nombre: 'Superman' },
     { id: 14, nombre: 'Celeritas' },
