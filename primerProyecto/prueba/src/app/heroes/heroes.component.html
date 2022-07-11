@@ -1,0 +1,20 @@
+<h2>Mis héroes</h2>
+<ul class="heroes">
+    <li *ngFor="let heroes of heroes">
+        <button [class.selected]="heroes === selectedHero" type="button" (click)="onSelect(heroes)">
+            <span class="badge">{{heroes.id}}</span>
+            <span class="name">{{heroes.nombre}}</span>
+        </button>
+    </li>
+</ul>
+
+<div *ngIf="selectedHero">
+    <h2>{{selectedHero.nombre | uppercase}} Details</h2>
+    <div>id: {{selectedHero.id}}</div>
+    <div>
+        <label for="hero-name">Hero nombre: </label>
+        <input id="hero-name" [(ngModel)]="selectedHero.nombre" placeholder="nombre">
+    </div>
+</div>
+
+<!-- https://angular.io/tutorial/toh-pt3 -->
