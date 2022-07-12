@@ -1,5 +1,8 @@
 import { HeroInterfaz } from '../interfaces/heroe';
 
+/**
+ * Lista de héroes a través de la interfaz.
+ */
 export const HEROESLISTA: HeroInterfaz[] = [
     { id: 12, nombre: 'Batman' },
     { id: 13, nombre: 'Superman' },

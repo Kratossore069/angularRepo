@@ -8,10 +8,18 @@ export class MessageServiceService {
 
   constructor() {}
 
+  /**
+   * MÉTODO QUE AÑADE UN MENSAJE A 
+   * LA LISTA DE NOTICIAS
+   * @param message mensaje de un cambio
+   */
   add(message: string) {
     this.messages.push(message);
   }
 
+  /**
+   * MÉTODO QUE VACÍA LA LISTA DE MENSAJES
+   */
   clear() {
     this.messages = [];
   }

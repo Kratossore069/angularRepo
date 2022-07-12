@@ -1,13 +1,17 @@
 <h2>Mis héroes</h2>
 <ul class="heroes">
-    <li *ngFor="let heroes of heroes">
-        <button [class.selected]="heroes === selectedHero" type="button" (click)="onSelect(heroes)">
-            <span class="badge">{{heroes.id}}</span>
-            <span class="name">{{heroes.nombre}}</span>
-        </button>
-    </li>
+  <li *ngFor="let heroes of heroes">
+    <a routerLink="/detalle/{{ heroes.id }}">
+      <span class="badge">{{ heroes.id }}</span> {{ heroes.nombre }}
+    </a>
+  </li>
 </ul>
+<div>
+  <label for="new-hero">Hero name: </label>
+  <input id="new-hero" #heroName />
 
-<app-hero-detail [hero]="selectedHero"></app-hero-detail>
-
-<!-- https://angular.io/tutorial/toh-pt5 -->
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button type="button" class="add-button" (click)="add(heroName.value); heroName.value=''">
+    Añadir nuevo héroe
+  </button>
+</div>
