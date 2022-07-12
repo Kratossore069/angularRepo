@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HeroInterfaz } from './interfaces/heroe';
-import { HEROESLISTA } from './mocks/mock-heroes';
 import { Observable, of } from 'rxjs';
 import { MessageServiceService } from './message-service.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -57,16 +56,57 @@ export class HeroService {
     );
   }
 
+  /* GET heroes whose name contains search term */
+  searchHeroes(term: string): Observable<HeroInterfaz[]> {
+    if (!term.trim()) {
+      // if not search term, return empty hero array.
+      return of([]);
+    }
+    return this.http
+      .get<HeroInterfaz[]>(`${this.heroesUrl}/?name=${term}`)
+      .pipe(
+        tap((x) =>
+          x.length
+            ? this.log(`found heroes matching "${term}"`)
+            : this.log(`no heroes matching "${term}"`)
+        ),
+        catchError(this.handleError<HeroInterfaz[]>('searchHeroes', []))
+      );
+  }
+
+  /** GET hero by id. Return `undefined` when id not found */
+  getHeroNo404<Data>(id: number): Observable<HeroInterfaz> {
+    const url = `${this.heroesUrl}/?id=${id}`;
+    return this.http.get<HeroInterfaz[]>(url).pipe(
+      map((heroes) => heroes[0]), // returns a {0|1} element array
+      tap((h) => {
+        const outcome = h ? 'fetched' : 'did not find';
+        this.log(`${outcome} hero id=${id}`);
+      }),
+      catchError(this.handleError<HeroInterfaz>(`getHero id=${id}`))
+    );
+  }
+
   /** POST: add a new hero to the server */
   addHero(hero: HeroInterfaz): Observable<HeroInterfaz> {
     return this.http
       .post<HeroInterfaz>(this.heroesUrl, hero, this.httpOptions)
       .pipe(
         tap((newHero: HeroInterfaz) =>
-          this.log(`added hero w/ id=${newHero.id}`)
+          this.log(`Héroe añadido con id=${newHero.id}`)
         ),
         catchError(this.handleError<HeroInterfaz>('addHero'))
       );
+  }
+
+  /** DELETE: delete the hero from the server */
+  deleteHero(id: number): Observable<HeroInterfaz> {
+    const url = `${this.heroesUrl}/${id}`;
+
+    return this.http.delete<HeroInterfaz>(url, this.httpOptions).pipe(
+      tap((_) => this.log(`deleted hero id=${id}`)),
+      catchError(this.handleError<HeroInterfaz>('deleteHero'))
+    );
   }
 
   /**
@@ -88,5 +128,4 @@ export class HeroService {
       return of(result as T);
     };
   }
-  /*https://angular.io/tutorial/toh-pt6#add-a-new-hero*/
 }
