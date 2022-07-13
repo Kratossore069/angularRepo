@@ -10,7 +10,7 @@ import { HeroService } from '../hero.service';
 export class HeroesComponent implements OnInit {
   heroes: HeroInterfaz[] = [];
 
-  constructor(private heroService: HeroService) {}
+  constructor(private heroService: HeroService) { }
 
   ngOnInit(): void {
     this.getHeroes();
@@ -29,8 +29,14 @@ export class HeroesComponent implements OnInit {
     this.heroService.deleteHero(hero.id).subscribe();
   }
 
+  /**
+   * MÉTODO QUE AÑADE UN NUEVO HÉROE
+   * @param name nombre del nuevo héroe añadido
+   * @returns nada si no hay campo nombre adecuado
+   */
   add(name: string): void {
-    name = name.trim();
+    /*let nombre*/ name = name.trim();
+    //let id = Math.floor(Math.random() * 20) + 1;
     if (!name) { return; }
     this.heroService.addHero({ name } as HeroInterfaz)
       .subscribe(hero => {
