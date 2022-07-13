@@ -24,6 +24,11 @@ export class HeroesComponent implements OnInit {
     this.heroService.getHeroes().subscribe((heroes) => (this.heroes = heroes));
   }
 
+  /**
+   * MÉTODO PARA ELIMINAR UN HÉROE
+   * DE LA LISTA
+   * @param hero héroe a eliminar
+   */
   delete(hero: HeroInterfaz): void {
     this.heroes = this.heroes.filter((h) => h !== hero);
     this.heroService.deleteHero(hero.id).subscribe();
@@ -35,10 +40,9 @@ export class HeroesComponent implements OnInit {
    * @returns nada si no hay campo nombre adecuado
    */
   add(name: string): void {
-    /*let nombre*/ name = name.trim();
-    //let id = Math.floor(Math.random() * 20) + 1;
-    if (!name) { return; }
-    this.heroService.addHero({ name } as HeroInterfaz)
+    let nombre = name.trim();
+    if (!nombre) { return; }
+    this.heroService.addHero({ nombre } as HeroInterfaz)
       .subscribe(hero => {
         this.heroes.push(hero);
       });

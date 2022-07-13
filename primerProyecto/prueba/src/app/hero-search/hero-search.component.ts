@@ -15,20 +15,25 @@ export class HeroSearchComponent implements OnInit {
 
   constructor(private servicioHeroe: HeroService) {}
 
-  // Push a search term into the observable stream.
+  /**
+   * MÉTODO QUE BUSCA POR UN TÉRMINO
+   * A UN HÉROE EN CONCRETO
+   * @param term texto a buscar
+   */
   search(term: string): void {
     this.searchTerms.next(term);
   }
 
   ngOnInit(): void {
     this.heroes$ = this.searchTerms.pipe(
-      // wait 300ms after each keystroke before considering the term
+      // Espera 300ms después de cada tecla pulsada antes de 
+      // buscar todo el texto
       debounceTime(300),
 
-      // ignore new term if same as previous term
+      // Ignora la nueva letra si es la misma que la anterior
       distinctUntilChanged(),
 
-      // switch to new search observable each time the term changes
+      // Cambia a una nueva búsqueda observable cada vez que cambia el término
       switchMap((term: string) => this.servicioHeroe.searchHeroes(term))
     );
   }
