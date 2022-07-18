@@ -20,10 +20,12 @@ export class ItemsComponent implements OnInit {
 
   deleteItem(item: ItemClase) {
     this.items = this.items.filter((x) => x.id != item.id);
+    this.servicio.delete(item).subscribe();
     this.totalPrecio();
   }
 
   cambiarItem(item: ItemClase) {
+    this.servicio.toggleItem(item).subscribe();
     this.totalPrecio();
   }
 
