@@ -1,0 +1,18 @@
+<div class="row" [ngClass]="{'completed':objetos.completed}">
+  <div class="title">
+    <input type="checkbox" [checked]="objetos.completed" (change)="cambiar(objetos)"/>
+    {{ objetos.title }}
+  </div>
+  <div class="price">
+    {{ objetos.price | currency }}
+  </div>
+  <div class="quantity">
+    {{ objetos.quantity }}
+  </div>
+  <div class="total">
+    {{ objetos.price * objetos.quantity | currency }}
+  </div>
+  <div class="actions">
+    <button class="btn btn-danger" (click)="eliminar(objetos)">Eliminar</button>
+  </div>
+</div>
