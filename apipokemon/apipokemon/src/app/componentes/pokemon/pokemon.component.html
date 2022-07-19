@@ -1,0 +1,8 @@
+<p>Nombre: </p>
+<input type="text" [(ngModel)]="nombre">
+<button (click)="getPokemonNombre()" class="btn btn-success">Buscar</button>
+
+<div *ngIf="imagen">
+<img src="{{imagen}}">
+<h3>Tipo: {{tipo}}</h3>
+</div>

@@ -9,6 +9,7 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class HeroService {
+  // URL donde se captura la petición
   private heroesUrl = 'api/heroes'; // URL to web api
 
   httpOptions = {
