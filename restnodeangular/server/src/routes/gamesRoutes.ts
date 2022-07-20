@@ -1,19 +1,24 @@
-import { Router } from 'express'
+import express, { Router } from 'express';
 
-class GamesRoutes {
+import gamesController from '../controllers/gamesController';
 
-    public router: Router = Router();
+class GameRoutes {
+
+    router: Router = Router();
 
     constructor() {
         this.config();
     }
 
     config() {
-        this.router.get('/', (req, res) => {
-            res.send('Juegos')
-        })
+        this.router.get('/', gamesController.list);
+        this.router.get('/:id', gamesController.getOne);
+        this.router.post('/', gamesController.create);
+        this.router.put('/:id', gamesController.update);
+        this.router.delete('/:id', gamesController.delete);
     }
+
 }
 
-const gamesRoutes = new GamesRoutes()
-export default gamesRoutes.router
+export default new GameRoutes().router;
+
