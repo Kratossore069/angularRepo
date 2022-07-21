@@ -2,8 +2,8 @@ export default {
 
     database: {
         host: 'localhost',
-        user: 'root',
-        password: 'whateverpass',
+        user: 'cursojava',
+        password: 'cursojava',
         database: 'ng_games'
     }
 
