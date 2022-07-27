@@ -10,7 +10,7 @@ import { Producto } from '../modelos/producto';
 export class ProductoService {
   url: string = 'http://localhost:8080/api/productos';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   /**
    * RECIBE LOS PRODUCTOS DESDE EL BACK
@@ -57,5 +57,14 @@ export class ProductoService {
    */
   obtenerProducto(id: number): Observable<Producto> {
     return this.http.get<Producto>(this.url + '/' + id);
+  }
+
+  /**
+   * ELIMINA UN PRODUCTO DEL BACK
+   * @param id 
+   * @returns 
+   */
+  borrarProducto(id: number): Observable<Producto> {
+    return this.http.delete<Producto>(this.url + "/listar/" + id);
   }
 }

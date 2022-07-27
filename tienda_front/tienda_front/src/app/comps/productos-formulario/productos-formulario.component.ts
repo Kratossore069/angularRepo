@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Categoria } from 'src/app/modelos/categoria';
 import { Producto } from 'src/app/modelos/producto';
 import { ProductoService } from 'src/app/servicio/producto.service';
@@ -16,12 +16,13 @@ export class ProductosFormularioComponent implements OnInit {
 
   constructor(
     private servicio: ProductoService,
-    private activatedRoute: ActivatedRoute
-  ) {}
+    private activatedRoute: ActivatedRoute,
+    private router:Router
+  ) { }
 
   ngOnInit(): void {
     this.listarCategorias();
-    this.buscarIDProducto();
+    //this.buscarIDProducto();
   }
 
   /**
@@ -53,7 +54,16 @@ export class ProductosFormularioComponent implements OnInit {
    */
   agregarProducto() {
     this.servicio.crearProducto(this.producto).subscribe((data) => {
-      alert('Producto añadido');
+      console.log("Agregado "+data);
     });
+  }
+
+  /**
+   * ACTUALIZAR PRODUCTO DE LA TIENDA
+   */
+  actualizarProducto() {
+    this.servicio.actualizarProducto(this.producto).subscribe(res => {
+      console.log("Actualizado");
+    })
   }
 }

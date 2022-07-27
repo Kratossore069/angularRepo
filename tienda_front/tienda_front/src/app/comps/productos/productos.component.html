@@ -18,7 +18,7 @@
                 <td>{{producto.categoria.nombre}}</td>
                 <td>
                     <button class="btn btn-success me-2" [routerLink]="['formulario',producto.id]">Editar</button>
-                    <button class="btn btn-danger">Eliminar</button>
+                    <button class="btn btn-danger" (click)="eliminarProducto(producto.id)" >Eliminar</button>
                 </td>
             </tr>
         </tbody>

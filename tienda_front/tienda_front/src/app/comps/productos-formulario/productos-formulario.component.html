@@ -35,7 +35,8 @@
 
         <div class="form-group row">
             <div class="col-sm-10">
-                <button type="submit" class="btn btn-success" (click)="agregarProducto()">Agregar</button>
+                <button type="submit" class="btn btn-success" *ngIf="!producto.id" (click)="agregarProducto()">Agregar</button>
+                <button type="submit" class="btn btn-info" *ngIf="producto.id" (click)="actualizarProducto()">Actualizar</button>
             </div>
         </div>
     </form>
