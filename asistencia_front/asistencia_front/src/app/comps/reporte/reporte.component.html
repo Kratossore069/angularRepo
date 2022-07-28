@@ -1,0 +1,26 @@
+<div class="container">
+    <h3 class="text-center">Reporte de asistencias</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellidos</th>
+                <th scope="col">Código</th>
+                <th scope="col">Registro</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let asistencia of asistencias">
+                <th>{{asistencia.estudiante.nombre}}</th>
+                <td>{{asistencia.estudiante.apellidos}}</td>
+                <td scope="row">{{asistencia.estudiante.codigo}}</td>
+                <td>
+                    <input type="checkbox" id="" name="" [(ngModel)]="asistencia.ingresoConfirmado">
+                    <label for=""> Ingreso</label><br>
+                    <input type="checkbox" id="" name="" [(ngModel)]="asistencia.salidaConfirmado">
+                    <label for=""> Salida</label><br>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
